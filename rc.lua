@@ -228,6 +228,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
 
+    awful.key({             }, "Print", function() awful.spawn.with_shell(screenshot_cmd .. screenshot_dest()) end, 
+    {description = "Take a Screenshot", group = "tag"}), 
+
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
