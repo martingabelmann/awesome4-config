@@ -36,36 +36,32 @@ do
 end
 -- }}}
 
--- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
-beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
+-- {{{ Load theme
+-- check if the theme defined in the themeswitch file exists and load it
+if awful.util.file_readable(awful.util.getdir('config') .. "/themeswitch") then
+    theme_name = io.open(awful.util.getdir('config') .. "/themeswitch", "r"):read "line"
+else 
+    theme_name = "default"
+end
+
+theme_dir = awful.util.getdir("config") .. "/themes/" .. theme_name
+
+if awful.util.file_readable(theme_dir .. "/theme.lua") then
+    naughty.notify({text = "using theme " .. theme_name , timeout=2})
+else
+    naughty.notify({preset = naughty.config.presets.critical, text = "theme " .. theme_name .. " not found. Falling back..." })
+    theme_name = "default"
+    theme_dir = awful.util.get_themes_dir() .. theme_name
+end
+beautiful.init(theme_dir .. "/theme.lua")
+-- }}}
+
+--- {{{ User vars and configs
+require('config')
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xfce4-terminal"
-editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
-
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
-
--- Table of layouts to cover with awful.layout.inc, order matters.
-awful.layout.layouts = {
-    awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
-}
--- }}}
+--- }}}
 
 -- {{{ Helper functions
 local function client_menu_toggle_fn()
@@ -99,9 +95,6 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
-
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
 -- Keyboard map indicator and switcher
