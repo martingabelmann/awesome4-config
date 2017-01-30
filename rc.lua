@@ -14,6 +14,9 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Lian from copycat https://github.com/copycat-killer/lain.git
 local lain = require("lain")
 
+-- dynamic bindings: https://github.com/Elv13/repetitive
+require("repetitive")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
