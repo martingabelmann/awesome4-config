@@ -11,6 +11,9 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
+-- Lian from copycat https://github.com/copycat-killer/lain.git
+local lain = require("lain")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -88,6 +91,22 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
+
+-- battery widget
+if awful.util.file_readable("/sys/class/power_supply/" ..mybattery_target ..  "/capacity") then
+    mybattery = lain.widgets.bat({
+        settings = function()
+            if bat_now.perc ~= "N/A" then
+                bat_now.perc = bat_now.perc .. "%"
+            end
+            widget:set_text(bat_now.perc)
+        end})
+    mybattery.icon = wibox.widget.imagebox(awesome_home .. "/icons/bat.png")
+
+else
+    mybattery = {}
+end
+
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
@@ -187,6 +206,8 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
+            mybattery.icon,
+            mybattery.widget,
             mytextclock,
             s.mylayoutbox,
         },

@@ -44,11 +44,8 @@ modkey = "Mod4"
 volfile = "/proc/acpi/ibm/volume"
 --volfile = false --disables volume widget
 
--- Battery widget: files containing capacity and charge informations (ibm thinkpads)
-batcapacityfile="/sys/class/power_supply/BAT0/capacity"
-batstatusfile="/sys/class/power_supply/BAT0/status"
---batstatusfile="" -- disables battery widget
---batcapacityfile="" 
+-- battery to show
+mybattery_target="BAT0"
 
 -- {{{  Wallpaper config
 
