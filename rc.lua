@@ -79,6 +79,10 @@ local function client_menu_toggle_fn()
         end
     end
 end
+function round(num, idp)
+    return tonumber(string.format("%." .. (idp or 0) .. "f", num))
+end
+
 -- }}}
 
 -- {{{ Menu
@@ -108,6 +112,51 @@ else
     mybattery = {}
 end
 
+-- Audio widget
+-- either use thinkpads hardware buttons or pulse audio
+
+-- function to read status of hardware (sound) buttons
+function readvol()
+    vol_file = io.open(volfile, "r")
+    vol_line = vol_file:read()
+    mutestatus = vol_file:read()
+    vol_file:close()
+    vol = "N/A"
+    for column in string.gmatch(vol_line, "%S+") do
+        if tonumber(column) ~= nil then
+            vol = round(column*100/14)
+        end
+    end
+
+    if string.find(mutestatus, "on", 1, true) then
+        volcolor = theme.fg_focus
+    else 
+        volcolor = theme.fg_normal
+    end
+
+    return "<span color='" .. volcolor .. "'>" .. vol .. "% </span>"
+end
+-- try to find/read hardware buttons
+if volfile and  awful.util.file_readable(volfile) then
+    volume = {}
+    volume.widget = wibox.widget.textbox()
+    volume.widget:set_markup(readvol())
+    voltimer = timer({timeout=2})
+    voltimer:connect_signal("timeout", function() volume.widget:set_markup(readvol()) end)
+    voltimer:start()
+-- read pulse audio as fallback
+else
+    volume = lain.widgets.pulseaudio({
+        settings = function()
+            if volume_now.muted == "no" then 
+                volcolor = theme.fg_normal
+            else 
+                volcolor = theme.fg_focus 
+            end
+            widget:set_markup(lain.util.markup(volcolor, volume_now.left .. "%"))
+        end})
+end
+volume.icon = wibox.widget.imagebox(awesome_home .. "/icons/spkr.png")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
@@ -207,6 +256,8 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
+            volume.icon,
+            volume.widget,
             mybattery.icon,
             mybattery.widget,
             mytextclock,
