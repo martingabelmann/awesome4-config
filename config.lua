@@ -47,28 +47,6 @@ volfile = "/proc/acpi/ibm/volume"
 -- battery to show
 mybattery_target="BAT0"
 
--- {{{  Wallpaper config
-
--- Wallpapers directory, dont store anyting else in there!
-wp_path = awesome_home .. "/backgrounds/"
-
--- set to random to get random wallpapers per session per tag
---wp_index    = "random"
-
--- ...or order the wallpers on your own choice
--- wp_index = {1,1,1,1,1,1,1,1,1}
-
--- or set to theme if you want to choose the background.[png|jpg] from theme dir
-wp_index = "theme"
-
--- set one wallpaper per screen (true) 
--- or stretch the same over all monitors (false)
-wp_screen = false
-
--- wether to ignore aspect ratio
-wp_aspectratio = true
-
--- }}}
 
 -- {{{ Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
