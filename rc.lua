@@ -89,8 +89,9 @@ require("menu")
 mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
--- Create a textclock widget
+-- Create a textclock widget and attach a calendar
 mytextclock = wibox.widget.textclock()
+mycalendar = lain.widgets.calendar({attach_to={mytextclock}})
 
 -- battery widget
 if awful.util.file_readable("/sys/class/power_supply/" ..mybattery_target ..  "/capacity") then
@@ -250,7 +251,9 @@ globalkeys = awful.util.table.join(
               {description = "show main menu", group = "awesome"}),
 
     awful.key({             }, "Print", function() awful.spawn.with_shell(screenshot_cmd .. screenshot_dest()) end, 
-    {description = "Take a Screenshot", group = "tag"}), 
+    {description = "Take a Screenshot", group = "tag"}),
+    awful.key({ modkey, }, "c", function () lain.widgets.calendar.show(7) end),
+
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
