@@ -17,7 +17,7 @@ theme.mem              = awesome_home .. "/icons/mem.png"
 theme.disc             = awesome_home .. "/icons/disc.png"
 theme.cpu              = awesome_home .. "/icons/cpu.png"
 
-theme.font          = "clean 10"
+theme.font          = "Terminus 8"
 theme.border_width  = 0
 theme.tasklist_disable_icon = true
 
