@@ -64,7 +64,7 @@ awful.layout.layouts = {
 
 -- {{{ Wallpaper
 -- optional override the theme wallpaper 
-beautiful.wallpaper = os.getenv("HOME") .. "/Backgrounds/wp1.png"
+--beautiful.wallpaper = os.getenv("HOME") .. "/Backgrounds/wp1.png"
 
 -- wether to stretch the wallpaper over all screens
 wp_stretch = false
