@@ -19,6 +19,7 @@ theme.cpu              = awesome_home .. "/icons/cpu.png"
 
 theme.font          = "Terminus 8"
 theme.border_width  = 0
+theme.useless_gap   = 0
 theme.tasklist_disable_icon = true
 
 --default applications for the menu
@@ -63,7 +64,7 @@ awful.layout.layouts = {
 
 -- {{{ Wallpaper
 -- optional override the theme wallpaper 
---beautiful.wallpaper = os.getenv("HOME") .. "/Backgrounds/wp1.png"
+beautiful.wallpaper = os.getenv("HOME") .. "/Backgrounds/wp1.png"
 
 -- wether to stretch the wallpaper over all screens
 wp_stretch = false
