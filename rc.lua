@@ -212,6 +212,7 @@ local function set_wallpaper(s)
         if type(wallpaper) == "function" then
             wallpaper = wallpaper(s)
         end
+        if wp_stretch then s = nil end
         gears.wallpaper.maximized(wallpaper, s, true)
     end
 end
