@@ -79,7 +79,7 @@ menubar.show_categories = false
 
 -- {{{ Client Rules
 custom_rules = {
-    { rule = { class = "Qutebrowser" }, properties = { screen = 1, tag = "1" } },
-    { rule = { class = "Thunderbird" }, properties = { screen = 1, tag = "2" } }
+    { rule = { class = "qutebrowser" }, properties = { screen = 1, tag = "1" } },
+    { rule = { class = "Thunderbird" }, properties = { screen = 1, tag = "2" } },
 }
 -- }}}

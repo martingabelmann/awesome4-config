@@ -518,8 +518,10 @@ awful.rules.rules = {
           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
       }, properties = { floating = true }},
-    custom_rules
 }
+for k,v in pairs(custom_rules) do
+    table.insert(awful.rules.rules,v)
+end
 -- }}}
 
 -- {{{ Signals
