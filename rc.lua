@@ -98,11 +98,11 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibar
 -- Create a textclock widget and attach a calendar
 mytextclock = wibox.widget.textclock()
-mycalendar = lain.widgets.calendar({attach_to={mytextclock}})
+mycalendar = lain.widget.calendar({attach_to={mytextclock}})
 
 -- battery widget
 if awful.util.file_readable("/sys/class/power_supply/" ..mybattery_target ..  "/capacity") then
-    mybattery = lain.widgets.bat({
+    mybattery = lain.widget.bat({
         settings = function()
             if bat_now.perc ~= "N/A" then
                 bat_now.perc = bat_now.perc .. "%"
