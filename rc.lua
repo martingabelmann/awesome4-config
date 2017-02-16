@@ -149,7 +149,7 @@ if volfile and  awful.util.file_readable(volfile) then
     voltimer:start()
 -- read pulse audio as fallback
 else
-    volume = lain.widgets.pulseaudio({
+    volume = lain.widget.pulseaudio({
         settings = function()
             if volume_now.muted == "no" then 
                 volcolor = theme.fg_normal
@@ -307,7 +307,7 @@ globalkeys = awful.util.table.join(
 
     awful.key({             }, "Print", function() awful.spawn.with_shell(screenshot_cmd .. screenshot_dest()) end, 
     {description = "Take a Screenshot", group = "tag"}),
-    awful.key({ modkey, }, "c", function () lain.widgets.calendar.show(7) end),
+    awful.key({ modkey, }, "c", function () lain.widget.calendar.show(7) end),
 
 
     -- Layout manipulation
