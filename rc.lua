@@ -103,14 +103,15 @@ mycalendar = lain.widget.calendar({attach_to={mytextclock}})
 -- battery widget
 if awful.util.file_readable("/sys/class/power_supply/" ..mybattery_target ..  "/capacity") then
     mybattery = lain.widget.bat({
+        battery = mybattery_target,
         settings = function()
             if bat_now.perc ~= "N/A" then
-                bat_now.perc = bat_now.perc .. "%"
+                widget:set_text(bat_now.perc .. "%")
+            else 
+                widget:set_text("N/A")
             end
-            widget:set_text(bat_now.perc)
         end})
     mybattery.icon = wibox.widget.imagebox(awesome_home .. "/icons/bat.png")
-
 else
     mybattery = {}
 end
